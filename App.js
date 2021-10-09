@@ -1,84 +1,109 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { I18nManager } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function App() {
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(prevCount => prevCount + 1);
+function HomeScreen({ navigation }) {
   return (
-    <View style={styles.mainView}>
-      <View style={styles.titleText}>
-        <Text style={styles.tilteText2}>شركة ابو عواد لتجارة الفواكه</Text>
-        <StatusBar style="auto" />
-      </View>
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={onPress}
-        >
-          <Text style={styles.textButton}>إستلام </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={onPress}
-        >
-          <Text style={styles.textButton}>بيع</Text>
-        </TouchableOpacity>
-
-
-      </View>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Notifications')}
+        title="Go to notifications"
+      />
     </View>
   );
-
-
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 7,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection:"row",
-  },
-  titleText: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: 'center',
-    marginTop:30,
-    backgroundColor: '#ff0000',
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
+function NotificationsScreen1({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  I18nManager.forceRTL(true);
+  return (
+
+    <NavigationContainer >
+      <Drawer.Navigator initialRouteName="Home"
+        screenOptions={{
+          activeTintColor: '#e91e63',
+          itemStyle: { marginVertical: 5 },
+        }}>
+        <Drawer.Screen name="Home" component={HomeScreen}
+          options={({ navigation }) => ({
+            title: "الرئيسية",
+            headerStyle: {
+              backgroundColor: "rgb(0, 145, 234)",
+            },
+            drawerLabel: 'الرئيسية',
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              color: "white",
+
+            },
 
 
-  },
-  mainView: {
-    flex: 1,
-    backgroundColor: '#ffff00',
-    width: '100%', 
-    height: '100%'
-  },
-  tilteText2: {
-    textShadowColor: 'red',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#000000',
-    fontSize: 22,
-    fontStyle: 'italic',
-    textDecorationLine: 'underline',
-   
-  },
-  button: {
+          })
+          }
 
-   
+        />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen}
 
-    backgroundColor: "#cccccc",
-    padding: 10,
-    width:'30%',
-    height:100,
-    borderRadius:15,
+          options={({ navigation }) => ({
+            title: "استلام",
+            headerStyle: {
+              backgroundColor: "rgb(0, 145, 234)",
+            },
+            drawerLabel: 'استلام',
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              color: "white",
+
+            },
 
 
-  },textButton:{
-    marginVertical:20,
-    textAlign:"center",
-    fontSize: 22,
-  }
-});
+          })
+          }
+
+        />
+        <Drawer.Screen name="Notifications1" component={NotificationsScreen1}
+
+          options={({ navigation }) => ({
+            title: "بيع",
+            headerStyle: {
+              backgroundColor: "rgb(0, 145, 234)",
+            },
+            drawerLabel: 'بيع',
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+              color: "white",
+
+            },
+
+
+          })
+          }
+
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+
+  );
+}
