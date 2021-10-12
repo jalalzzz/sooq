@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    Button,
+
     View,
     Text,
     SafeAreaView,
@@ -9,7 +9,8 @@ import {
     ScrollView,
     Picker
 } from 'react-native';
-import { RadioButton } from 'react-native-paper';
+import { RadioButton, Button } from 'react-native-paper';
+
 
 
 const newBuyer = ({ navigation }) => {
@@ -18,6 +19,12 @@ const newBuyer = ({ navigation }) => {
     const [merchant, onChangeMerchant] = useState("");
     const [selectedValue, setSelectedValue] = useState("java");
     const [checked, setChecked] = useState('first');
+    const [driverName, onChangeDriverName] = useState('');
+    const [carLong, onChangeCarLong] = useState('');
+    const [carShort, onChangeCarShort] = useState('');
+    const [quantity, onChangeQuantity] = useState('');
+    const [wages, onChangeWages] = useState('');
+    const [empty, onChangeEmpty] = useState('');
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.listed}>
@@ -35,8 +42,8 @@ const newBuyer = ({ navigation }) => {
                 <Text style={styles.text}>اسم السائق  :</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeMerchant}
-                    value={merchant}
+                    onChangeText={onChangeDriverName}
+                    value={driverName}
                     placeholder="اسم السائق"
                     keyboardType="default"
                 />
@@ -46,17 +53,17 @@ const newBuyer = ({ navigation }) => {
                 <Text style={styles.text}>رقم السيارة:</Text>
                 <TextInput
                     style={styles.input2}
-                    onChangeText={onChangeMerchant}
-                    value={merchant}
+                    onChangeText={onChangeCarLong}
+                    value={carLong}
                     placeholder="رقم السيارة"
-                    keyboardType="numeric"
+                    keyboardType={'numeric'}
                     maxLength={5}
                 />
                 <Text style={styles.text}>-</Text>
                 <TextInput
                     style={styles.input3}
-                    onChangeText={onChangeMerchant}
-                    value={merchant}
+                    onChangeText={onChangeCarShort}
+                    value={carShort}
                     placeholder="ترميز السيارة"
                     keyboardType="numeric"
                     maxLength={2}
@@ -99,8 +106,8 @@ const newBuyer = ({ navigation }) => {
                 <Text style={styles.text}>الكمية:</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeMerchant}
-                    value={merchant}
+                    onChangeText={onChangeQuantity}
+                    value={quantity}
                     placeholder="الكمية"
                     keyboardType="numeric"
                 />
@@ -110,8 +117,8 @@ const newBuyer = ({ navigation }) => {
                 <Text style={styles.text}>أجور:</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeMerchant}
-                    value={merchant}
+                    onChangeText={onChangeWages}
+                    value={wages}
                     placeholder="أجور"
                     keyboardType="numeric"
                 />
@@ -121,11 +128,16 @@ const newBuyer = ({ navigation }) => {
                 <Text style={styles.text}>فارغ:</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeMerchant}
-                    value={merchant}
+                    onChangeText={onChangeEmpty}
+                    value={empty}
                     placeholder="فارغ"
                     keyboardType="numeric"
                 />
+            </View>
+            <View style={styles.listed}>
+                <Button color="#0091EA" mode="contained" onPress={() => console.log('Pressed')}>
+                    حفظ
+                </Button>
             </View>
         </ScrollView>
     );

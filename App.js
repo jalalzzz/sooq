@@ -7,11 +7,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import Buyer from './componet/buyer';
 import Seller from './componet/seller';
 import NewBuyer from './componet/newBuyer';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 
 
 
-
+ScreenOrientation.unlockAsync();
 function HomeScreen({ navigation }) {
 
   return (
@@ -43,6 +44,7 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   I18nManager.forceRTL(true);
+
   return (
 
     <NavigationContainer >
